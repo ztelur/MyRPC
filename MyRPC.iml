@@ -11,5 +11,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="org.apache.zookeeper:zookeeper:3.4.9" level="project" />
+    <orderEntry type="library" name="io.netty:netty-all:4.0.19.Final" level="project" />
   </component>
 </module>
