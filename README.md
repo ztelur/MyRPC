@@ -1,2 +1,0 @@
-# MyRPC
-toy for rpc
