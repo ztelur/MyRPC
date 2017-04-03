@@ -8,6 +8,10 @@ public class RpcRequest {
     private Class<?>[] parameterTypes;
     private Object[] parameters;
 
+    public RpcRequest() {
+        super();
+    }
+
     public String getRequestId() {
         return requestId;
     }

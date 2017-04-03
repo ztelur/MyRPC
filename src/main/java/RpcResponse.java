@@ -6,6 +6,10 @@ public class RpcResponse {
     private Throwable error;
     private Object result;
 
+    public RpcResponse() {
+        super();
+    }
+
     public String getRequestId() {
         return requestId;
     }

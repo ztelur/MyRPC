@@ -16,9 +16,9 @@ public class RpcDecoder extends ByteToMessageDecoder {
         this.genericsClass = genericsClass;
     }
 
-    protected void decode(ChannelHandlerContext channelHandlerContext, ByteBuf byteBuf, List<Object> list) throws Exception {
+    protected Object decode(ChannelHandlerContext channelHandlerContext, ByteBuf byteBuf) throws Exception {
         if (byteBuf.readableBytes() < 4) {
-            return;
+            return null;
         }
         byteBuf.markReaderIndex();
         int dataLength = byteBuf.readInt();
@@ -27,12 +27,16 @@ public class RpcDecoder extends ByteToMessageDecoder {
         }
         if (byteBuf.readableBytes() < dataLength) {
             byteBuf.resetReaderIndex();
-            return;
+            return null;
         }
         byte[] data = new byte[dataLength];
         byteBuf.readBytes(data);
 
         Object obj = SerializationUtil.deserialize(data, genericsClass);
-        list.add(obj);
+        return obj;
+    }
+
+    protected void decode(ChannelHandlerContext channelHandlerContext, ByteBuf byteBuf, List<Object> list) throws Exception {
+
     }
 }

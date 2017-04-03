@@ -53,8 +53,8 @@ public class RpcServer {
             ChannelFuture future = bootstrap.bind(host, port).sync();
             future.channel().closeFuture().sync();
         } finally {
-            workerGroup.shutdownGracefully();
-            bossGroup.shutdownGracefully()
+            workerGroup.shutdown();
+            bossGroup.shutdown();
         }
     }
 }
