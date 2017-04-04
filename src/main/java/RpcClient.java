@@ -22,7 +22,8 @@ public class RpcClient extends ChannelInboundMessageHandlerAdapter<RpcResponse>{
 
 
     protected void messageReceived(ChannelHandlerContext channelHandlerContext, RpcResponse rpcResponse) throws Exception {
-        this.response = response;
+        System.out.println("messageReceived " + rpcResponse.getResult());
+        this.response = rpcResponse;
         synchronized (object) {
             object.notifyAll();
         }
@@ -43,8 +44,9 @@ public class RpcClient extends ChannelInboundMessageHandlerAdapter<RpcResponse>{
                     .channel(NioSocketChannel.class)
                     .handler(new ChannelInitializer<SocketChannel>() {
                         protected void initChannel(SocketChannel socketChannel) throws Exception {
-                            socketChannel.pipeline().addLast(new RpcDecoder(RpcResponse.class))
-                                    .addLast(new RpcCoder(RpcRequest.class))
+                            socketChannel.pipeline()
+                                    .addLast(new RpcDecoder(RpcResponse.class))
+                                    .addLast(new RpcClientEncoder())
                                     .addLast(RpcClient.this);
                         }
                     }).option(ChannelOption.SO_KEEPALIVE, true);

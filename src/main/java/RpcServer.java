@@ -30,6 +30,7 @@ public class RpcServer {
         super();
         this.serverAddress = serverAddress;
         this.serviceRegistry = registry;
+        this.handlerMap.put("HelloService", new HelloServiceImpl());
     }
 
     public void init() throws Exception{
@@ -41,7 +42,9 @@ public class RpcServer {
                     .channel(NioServerSocketChannel.class)
                     .childHandler(new ChannelInitializer<SocketChannel>() {
                         protected void initChannel(SocketChannel socketChannel) throws Exception {
-//                            socketChannel.pipeline().addLast()
+                            socketChannel.pipeline().addLast(new RpcDecoder(RpcRequest.class))
+                                    .addLast(new RpcServerEncoder())
+                                    .addLast(new RpcHandler(handlerMap));
                         }
                     })
                     .option(ChannelOption.SO_BACKLOG, 128)
@@ -50,6 +53,7 @@ public class RpcServer {
             String[] array = serverAddress.split(":");
             String host = array[0];
             int port = Integer.parseInt(array[1]);
+            System.out.println("the rpc server address is " + host + " " + port);
             ChannelFuture future = bootstrap.bind(host, port).sync();
             future.channel().closeFuture().sync();
         } finally {

@@ -14,8 +14,8 @@
     <orderEntry type="library" name="io.netty:netty-all:4.0.0.Beta1" level="project" />
     <orderEntry type="library" name="org.apache.zookeeper:zookeeper:3.3.0" level="project" />
     <orderEntry type="library" name="io.netty:netty-all:4.0.0.Beta11" level="project" />
-    <orderEntry type="library" name="com.dyuproject.protostuff:protostuff-core:1.0.0" level="project" />
-    <orderEntry type="library" name="com.dyuproject.protostuff:protostuff-runtime-md:1.0.1" level="project" />
     <orderEntry type="library" name="org.objenesis:objenesis-tck:2.5" level="project" />
+    <orderEntry type="library" name="io.protostuff:protostuff-runtime:1.5.3" level="project" />
+    <orderEntry type="library" name="io.protostuff:protostuff-core:1.5.3" level="project" />
   </component>
 </module>

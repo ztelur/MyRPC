@@ -19,7 +19,7 @@ public class RpcHandler extends ChannelInboundMessageHandlerAdapter<RpcRequest>{
     protected void messageReceived(ChannelHandlerContext channelHandlerContext, RpcRequest rpcRequest) throws Exception {
         RpcResponse response = new RpcResponse();
         response.setRequestId(rpcRequest.getRequestId());
-
+        System.out.println("messageReceived");
         try {
             Object result = handle(rpcRequest);
             response.setResult(result);
