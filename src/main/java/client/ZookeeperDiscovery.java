@@ -1,7 +1,6 @@
 package client;
 
 import org.apache.log4j.Logger;
-import org.apache.log4j.spi.LoggerFactory;
 import org.apache.zookeeper.KeeperException;
 import org.apache.zookeeper.WatchedEvent;
 import org.apache.zookeeper.Watcher;
@@ -12,7 +11,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Created by homer on 17-4-3.
@@ -39,9 +37,11 @@ public class ZookeeperDiscovery {
             if (size == 1) {
                 data = dataList.get(0);
             } else {
-                data = dataList.get(ThreadLocalRandom.current().nextInt(size));
+                data = dataList.get(0);
+//                data = dataList.get(ThreadLocalRandom.current().nextInt(size));
             }
         }
+        System.out.println("the data is " + data);
         return data;
     }
 

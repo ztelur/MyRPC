@@ -33,7 +33,7 @@ public class RpcServer {
         this.handlerMap.put("HelloService", new HelloServiceImpl());
     }
 
-    public void init() throws Exception{
+    public void init() throws Exception {
         EventLoopGroup bossGroup = new NioEventLoopGroup();
         EventLoopGroup workerGroup = new NioEventLoopGroup();
         try {
